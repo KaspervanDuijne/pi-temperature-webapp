@@ -7,7 +7,7 @@ const app = express();
 app.use(express.static(__dirname + "/client"));
 const server = http.createServer(app).listen(config.port, config.ip);
 
-//messages and websocket
+//messages and websockets
 const websocket = require("ws");
 const messages = require("./client/scripts/messages");
 const wss = new websocket.Server({server});
