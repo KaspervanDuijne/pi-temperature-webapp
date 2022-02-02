@@ -44,7 +44,7 @@ wss.on("connection", function connection(ws){
         })
     }
     send();
-
+    //lasttest
 	ws.onmessage = function incoming(event){
         const data = JSON.parse(event.toString());
         console.log("here");
