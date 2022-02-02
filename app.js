@@ -16,7 +16,6 @@ const wss = new websocket.Server({server});
 const router = require("./routes/routes");
 app.get("/", router);
 
-let websockets = {};
 
 wss.on("connection", function connection(ws){	
 
