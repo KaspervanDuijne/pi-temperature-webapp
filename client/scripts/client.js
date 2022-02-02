@@ -1,4 +1,4 @@
-const socket = new WebSocket("ws://192.168.178.144:3000");
+const socket = new WebSocket("ws://192.168.178.130:3000");
 const cpu = document.getElementById("cpu");
 const gpu = document.getElementById("gpu");
 let cpuIndex = 0;
