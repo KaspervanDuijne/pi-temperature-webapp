@@ -3,6 +3,8 @@ const express = require("express");
 const http = require("http");
 const config = require("./config");
 const app = express();
+const fs = require("fs");
+const spawn = require("child_process").spawn;
 
 app.use(express.static(__dirname + "/client"));
 const server = http.createServer(app).listen(config.port, config.ip);
@@ -21,10 +23,25 @@ wss.on("connection", function connection(ws){
 
     function send(){
         let data = messages.O_DATA;
-        data.cpu = 5;
-        data.gpu = "temp: 5";
-        ws.send(JSON.stringify(data));
-        setTimeout(send, 1000);
+
+        function getGpuTemp(callback){
+            let command = spawn("/opt/vc/bin/vcgencmd", ["measure_temp"]);
+            let result = "";
+            command.stdout.on("data", function(data){
+                result += data.toString();
+            })
+            command.on("close", function(code){
+                return callback(result);
+            })
+        }
+        
+        getGpuTemp(function(result){
+            const cpuTemp = fs.readFileSync("/sys/class/thermal/thermal_zone0/temp");
+            data.cpu = cpuTemp.toString();
+            data.gpu = result;
+            ws.send(JSON.stringify(data));
+            setTimeout(send, 1000);
+        })
     }
     send();
 
