@@ -46,6 +46,8 @@ wss.on("connection", function connection(ws){
     send();
 
 	ws.onmessage = function incoming(event){
+        const data = JSON.parse(event.toString());
+        console.log("here");
 	}
 	ws.onclose = function (code){
     }

@@ -6,6 +6,11 @@
         cpu: null,
         gpu: null,
     };
+    exports.T_RUN = "run";
+    exports.O_RUN = {
+        type:exports.T_RUN,
+        length:0
+    }
 
     //client to server
     // exports.makeMove
