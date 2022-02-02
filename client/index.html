@@ -8,8 +8,17 @@
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
-    <div id="cpu" class="box">test</div>
-    <div id="gpu" class ="box">test</div>
+    <h1>Raspberry Pi Temperatures</h1>
+    <!-- <div id="cpu" class="box">test</div>
+    <div id="gpu" class ="box">test</div> -->
+    <div class="flex-container">
+        <div id="chart_div1" class="graph"></div>
+        <div id="chart_div2"class="graph"></div>
+    </div>
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <script src="scripts/messages.js"></script>
     <script src="scripts/client.js"></script>
 

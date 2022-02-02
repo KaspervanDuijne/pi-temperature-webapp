@@ -24,30 +24,34 @@ wss.on("connection", function connection(ws){
     function send(){
         let data = messages.O_DATA;
 
-        function getGpuTemp(callback){
-            let command = spawn("/opt/vc/bin/vcgencmd", ["measure_temp"]);
-            let result = "";
-            command.stdout.on("data", function(data){
-                result += data.toString();
-            })
-            command.on("close", function(code){
-                return callback(result);
-            })
-        }
+        // function getGpuTemp(callback){
+        //     let command = spawn("/opt/vc/bin/vcgencmd", ["measure_temp"]);
+        //     let result = "";
+        //     command.stdout.on("data", function(data){
+        //         result += data.toString();
+        //     })
+        //     command.on("close", function(code){
+        //         return callback(result);
+        //     })
+        // }
         
-        getGpuTemp(function(result){
-            const cpuTemp = fs.readFileSync("/sys/class/thermal/thermal_zone0/temp");
-            data.cpu = cpuTemp.toString();
-            data.gpu = result;
-            ws.send(JSON.stringify(data));
-            setTimeout(send, 1000);
-        })
+        // getGpuTemp(function(result){
+        //     const cpuTemp = fs.readFileSync("/sys/class/thermal/thermal_zone0/temp");
+        //     data.cpu = cpuTemp.toString();
+        //     data.gpu = result;
+        //     ws.send(JSON.stringify(data));
+        //     setTimeout(send, 1000);
+        // })
+        data.cpu = 25400;
+        data.gpu = "temp=30.4";
+        ws.send(JSON.stringify(data));
+        setTimeout(send, 500);
     }
     send();
-    //lasttest
+ 
 	ws.onmessage = function incoming(event){
-        const data = JSON.parse(event.toString());
-        console.log("here");
+        const data = JSON.parse(event.data);
+        console.log(data.length);
 	}
 	ws.onclose = function (code){
     }

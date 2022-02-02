@@ -1,6 +1,28 @@
 body{
     background-color: aquamarine;
 }
-.box{
-    font-size: 300%;
+#chart_div1{
+    /* width: 50vw; */
+    /* height: 30vh; */
+   
+}
+#chart_div2{
+    /* width: 50vw; */
+    /* float: right; */
+    
+}
+.graph{
+    flex: 1;
+    border: 2px solid black;
+    height: 50vh;
+}
+.graph:first-child {
+    margin-right: 20px;
+}
+.flex-container{
+    display: flex;
+}
+h1{
+    text-align: center;
+    font-size: 400%;
 }
