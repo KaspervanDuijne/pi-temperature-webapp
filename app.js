@@ -17,8 +17,17 @@ const router = require("./routes/routes");
 app.get("/", router);
 
 let websockets = {};
+
 wss.on("connection", function connection(ws){	
 
+    function send(){
+        let data = messages.O_DATA;
+        data.cpu = 5;
+        data.gpu = "temp: 5";
+        ws.send(JSON.stringify(data));
+        setTimeout(send, 1000);
+    }
+    send();
 
 	ws.onmessage = function incoming(event){
 	}
